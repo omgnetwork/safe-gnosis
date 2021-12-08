@@ -114,7 +114,7 @@ services:
   safe-react:
       image: bobanetwork/safe-react
       build:
-        context: ../
+        context: ./safe-react
         dockerfile: ./Dockerfile
       env_file:
         - envs/.env_safe_react
