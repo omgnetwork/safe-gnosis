@@ -1,0 +1,12 @@
+[submodule "boba_ops/safe-transaction-service"]
+	path = boba_ops/safe-transaction-service
+	url = https://github.com/gnosis/safe-transaction-service
+[submodule "boba_ops/safe-config-service"]
+	path = boba_ops/safe-config-service
+	url = https://github.com/gnosis/safe-config-service
+[submodule "boba_ops/safe-client-gateway"]
+	path = boba_ops/safe-client-gateway
+	url = https://github.com/gnosis/safe-client-gateway
+[submodule "boba_ops/safe-react"]
+	path = boba_ops/safe-react
+	url = https://github.com/omgnetwork/safe-react

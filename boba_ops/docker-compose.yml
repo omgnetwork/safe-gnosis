@@ -1,0 +1,126 @@
+version: '3.5'
+
+volumes:
+  nginx-shared:
+  nginx-sharedd:
+
+services:
+  nginx-safe-transaction-service:
+    image: nginx:alpine
+    hostname: nginx-safe-transaction-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./safe-transaction-service/docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx-shared:/nginx
+    depends_on:
+      - safe-transaction-service
+
+  nginx-safe-config-service:
+    image: nginx:alpine
+    hostname: nginx-safe-config-service
+    env_file:
+      - envs/.env_safe_config_service
+    ports:
+      - "8001:80"
+    volumes:
+      - ./safe-config-service/nginx/templates:/etc/nginx/templates
+      - nginx-sharedd:/nginx
+    depends_on:
+      - safe-config-service
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    command:
+      - --save ""
+      - --appendonly no
+
+  db:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  safe-transaction-service:
+    image: bobanetwork/safe-transaction-service
+    build:
+      context: ./safe-transaction-service/
+      dockerfile: ./docker/web/Dockerfile
+    env_file:
+      - envs/.env_safe_transaction_service
+    depends_on:
+      - db
+      - redis
+      - worker
+      - scheduler
+    working_dir: /app
+    ports:
+      - "8888:8888"
+    volumes:
+      - nginx-shared:/nginx
+    restart: always
+    command: ./docker/web/run_web.sh
+
+  worker: &worker
+    image: bobanetwork/safe-transaction-service
+    build:
+      context: ./safe-transaction-service/
+      dockerfile: ./docker/web/Dockerfile
+    env_file:
+      - envs/.env_safe_transaction_service
+    depends_on:
+      - db
+      - redis
+    restart: always
+    command: ./docker/web/celery/worker/run.sh
+
+  scheduler:
+    <<: *worker
+    command: ./docker/web/celery/scheduler/run.sh
+
+  safe-client-gateway:
+    image: bobanetwork/safe-client-gateway
+    build:
+      context: ./safe-client-gateway/
+      dockerfile: ./Dockerfile
+    env_file:
+      - envs/.env_safe_client_gateway
+    environment:
+      - REDIS_URI=redis://redis:6379
+      - ROCKET_PORT=3666
+      - ROCKET_ADDRESS=0.0.0.0
+    depends_on:
+      - redis
+    ports:
+      - "8002:3666"
+
+  safe-config-service:
+    image: bobanetwork/safe-config-service
+    build:
+      context: ./safe-config-service/
+      dockerfile: ./Dockerfile
+    tty: true
+    volumes:
+      - nginx-sharedd:/nginx
+    env_file:
+      - envs/.env_safe_config_service
+    depends_on:
+      - db
+
+  safe-react:
+      image: bobanetwork/safe-react
+      build:
+        context: ../
+        dockerfile: ./Dockerfile
+      env_file:
+        - envs/.env_safe_react
+      volumes:
+        - /app/node_modules
+        - ../:/app
+      restart: always
+      ports:
+        - 3000:3000

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+docker exec -it boba_ops-safe-transaction-service-1 python manage.py createsuperuser

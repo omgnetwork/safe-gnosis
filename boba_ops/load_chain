@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+docker compose cp boba_chains.json safe-config-service:/tmp/boba_chains.json
+./run manage loaddata /tmp/boba_chains.json

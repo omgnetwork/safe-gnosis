@@ -1,0 +1,54 @@
+[
+  {
+    "model": "chains.chain",
+    "pk": 288,
+    "fields": {
+      "relevance": 1,
+      "name": "Boba",
+      "short_name": "boba",
+      "description": "Boba Network",
+      "l2": true,
+      "rpc_authentication": "API_KEY_PATH",
+      "rpc_uri": "https://mainnet.boba.network/",
+      "safe_apps_rpc_authentication": "NO_AUTHENTICATION",
+      "safe_apps_rpc_uri": "https://mainnet.boba.network/",
+      "block_explorer_uri_address_template": "https://blockexplorer.boba.network/address/{{address}}",
+      "block_explorer_uri_tx_hash_template": "https://blockexplorer.boba.network/tx/{{txHash}}",
+      "currency_name": "Ether",
+      "currency_symbol": "ETH",
+      "currency_decimals": 18,
+      "currency_logo_uri": "chains/1/currency_logo.png",
+      "transaction_service_uri": "http://nginx-safe-transaction-service:8000",
+      "vpc_transaction_service_uri": "http://nginx-safe-transaction-service:8000",
+      "theme_text_color": "#001428",
+      "theme_background_color": "#E8E7E6",
+      "recommended_master_copy_version": "1.3.0"
+    }
+  },
+  {
+    "model": "chains.chain",
+    "pk": 28,
+    "fields": {
+      "relevance": 2,
+      "name": "Boba Rinkeby",
+      "short_name": "boba_rinkeby",
+      "description": "Boba Network Rinkeby",
+      "l2": true,
+      "rpc_authentication": "NO_AUTHENTICATION",
+      "rpc_uri": "https://rinkeby.boba.network",
+      "safe_apps_rpc_authentication": "NO_AUTHENTICATION",
+      "safe_apps_rpc_uri": "https://rinkeby.boba.network",
+      "block_explorer_uri_address_template": "https://blockexplorer.rinkeby.boba.network/address/{{address}}",
+      "block_explorer_uri_tx_hash_template": "https://blockexplorer.rinkeby.boba.network/tx/{{txHash}}",
+      "currency_name": "Ether",
+      "currency_symbol": "ETH",
+      "currency_decimals": 18,
+      "currency_logo_uri": "chains/1/currency_logo.png",
+      "transaction_service_uri": "http://nginx-safe-transaction-service:8000",
+      "vpc_transaction_service_uri": "http://nginx-safe-transaction-service:8000",
+      "theme_text_color": "#ffffff",
+      "theme_background_color": "#E8673C",
+      "recommended_master_copy_version": "1.3.0"
+    }
+  }
+]
