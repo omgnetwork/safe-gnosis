@@ -120,7 +120,8 @@ services:
         - envs/.env_safe_react
       volumes:
         - /app/node_modules
-        - ../:/app
+        - /app/src/types/contracts
+        - ./safe-react/:/app
       restart: always
       ports:
         - 3000:3000
