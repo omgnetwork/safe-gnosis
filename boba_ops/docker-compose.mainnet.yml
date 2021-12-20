@@ -1,0 +1,5 @@
+version: '3.5'
+services:
+  safe-react:
+      env_file:
+        - envs/.env_safe_react_mainnet
