@@ -32,7 +32,7 @@
     "fields": {
       "relevance": 2,
       "name": "Boba Rinkeby",
-      "short_name": "boba_rinkeby",
+      "short_name": "boba-rinkeby",
       "description": "Boba Network Rinkeby",
       "l2": true,
       "rpc_authentication": "NO_AUTHENTICATION",
