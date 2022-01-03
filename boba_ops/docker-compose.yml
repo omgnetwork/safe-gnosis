@@ -115,17 +115,10 @@ services:
       image: bobanetwork/safe-react
       build:
         context: ./
-        dockerfile: ./Safe-React-Dockerfile
-        args:
-         - REACT_APP_CONFIG_SERVICE_URL=${REACT_APP_CONFIG_SERVICE_URL}
-         - REACT_APP_GATEWAY_URL=${REACT_APP_GATEWAY_URL}
-         - REACT_APP_ENV=production
-      env_file:
-        - envs/.env_safe_react
+        dockerfile: ./Safe-React-Dockerfile    
       volumes:
         - /app/node_modules
         - /app/src/types/contracts
-        - ./safe-react/:/app
       restart: always
       entrypoint: yarn start
       ports:

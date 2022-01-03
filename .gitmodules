@@ -9,4 +9,4 @@
 	url = https://github.com/gnosis/safe-client-gateway
 [submodule "boba_ops/safe-react"]
 	path = boba_ops/safe-react
-	url = https://github.com/gnosis/safe-react
+	url = git@github.com:gnosis/safe-react.git
