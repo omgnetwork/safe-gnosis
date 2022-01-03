@@ -37,7 +37,7 @@ jobs:
 
       - name: Build the services
         working-directory: ./boba_ops
-        run: docker compose build && docker image rm -f bobanetwork/safe-react
+        run: docker compose build 
 
       - name: Tag
         working-directory: ./boba_ops
@@ -56,25 +56,25 @@ jobs:
             docker push "$i"
           done
 
-      #separate building for mainnet and rinkeby frontends
-      - name: Build safe-react Mainnet
-        working-directory: ./boba_ops
-        run: docker compose -f docker-compose.yml -f docker-compose.mainnet.yml build safe-react
+      # #separate building for mainnet and rinkeby frontends
+      # - name: Build safe-react Mainnet
+      #   working-directory: ./boba_ops
+      #   run: docker compose -f docker-compose.yml -f docker-compose.mainnet.yml build safe-react
 
-      - name: Tag and Push
-        working-directory: ./boba_ops
-        run: |
-          docker images
-          docker image tag bobanetwork/safe-react bobanetwork/safe-react-mainnet:latest
-          docker push bobanetwork/safe-react-mainnet:latest
+      # - name: Tag and Push
+      #   working-directory: ./boba_ops
+      #   run: |
+      #     docker images
+      #     docker image tag bobanetwork/safe-react bobanetwork/safe-react-mainnet:latest
+      #     docker push bobanetwork/safe-react-mainnet:latest
       
-      - name: Build safe-react Rinkeby
-        working-directory: ./boba_ops
-        run: docker compose -f docker-compose.yml -f docker-compose.rinkeby.yml build safe-react
+      # - name: Build safe-react Rinkeby
+      #   working-directory: ./boba_ops
+      #   run: docker compose -f docker-compose.yml -f docker-compose.rinkeby.yml build safe-react
 
-      - name: Tag and Push
-        working-directory: ./boba_ops
-        run: |
-          docker images
-          docker image tag bobanetwork/safe-react bobanetwork/safe-react-rinkeby:latest
-          docker push bobanetwork/safe-react-rinkeby:latest
+      # - name: Tag and Push
+      #   working-directory: ./boba_ops
+      #   run: |
+      #     docker images
+      #     docker image tag bobanetwork/safe-react bobanetwork/safe-react-rinkeby:latest
+      #     docker push bobanetwork/safe-react-rinkeby:latest
