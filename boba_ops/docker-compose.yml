@@ -119,6 +119,9 @@ services:
       volumes:
         - /app/node_modules
         - /app/src/types/contracts
+        - type: bind
+          source: ./envs/.env_safe_react
+          target: /app/.env
       restart: always
       entrypoint: yarn start
       ports:
