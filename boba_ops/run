@@ -23,7 +23,7 @@ function _dc {
 
 function cmd {
   # Run any command you want in the safe-config-service container
-  _dc safe-config-service "${@}"
+  _dc $(docker container ls  | grep '/safe-config-service' | awk '{print $1}') "${@}"
 }
 
 function manage {
