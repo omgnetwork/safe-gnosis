@@ -14,9 +14,6 @@ RUN yarn install
 
 COPY safe-react/ .
 
-ADD envs/.env_safe_react ./.env
-
-
 EXPOSE 3000
 
 CMD ["yarn", "start"]
